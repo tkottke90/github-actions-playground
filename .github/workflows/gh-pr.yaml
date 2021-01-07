@@ -16,7 +16,7 @@ jobs:
     
     - name: Generate Branch Name
       run: |
-           BRANCH < echo "bot-$(date +"%Y%s")"
+           echo "bot-$(date +"%Y%s")" > BRANCH
            cat BRANCH
            
     - name: Checkout Branch
