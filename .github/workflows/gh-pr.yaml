@@ -13,3 +13,21 @@ jobs:
       
     - name: View Repo
       run: GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} gh repo view
+    
+    - name: Create Branch
+      run: |
+           export BRANCH="bot-$(date +"%Ys")"
+           git checkout -b $BRANCH
+           "::set-env name=BRANCH::$BRANCH"
+    
+    - name: Make Change
+      run: temp.txt < $(date)
+    
+    - name: Commit
+      run: |
+           git add package.json
+           git commit -m "chore(package.json) Update copyright to $(date +"%Y")"
+           git push --set-upstream origin $BRANCH
+    
+    - name: Create PR
+      run: GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} gh pr create
