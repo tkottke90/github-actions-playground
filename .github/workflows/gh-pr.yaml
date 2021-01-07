@@ -34,4 +34,4 @@ jobs:
            git push --set-upstream origin $(cat BRANCH)
     
     - name: Create PR
-      run: GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} gh pr create --title "Automated Update" --body "Test of automated PR creation on a schedule"
+      run: "GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} gh pr create --title 'Automated Update: Copyright' --body 'Test of automated PR creation on a schedule'"
