@@ -23,7 +23,7 @@ jobs:
       run: git checkout -b $(cat BRANCH)
   
     - name: Make Change
-      run: temp.txt < $(date)
+      run: date > temp.txt
     
     - name: Commit
       run: |
