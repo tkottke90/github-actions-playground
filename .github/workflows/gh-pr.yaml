@@ -23,13 +23,13 @@ jobs:
       run: git checkout -b $(cat BRANCH)
   
     - name: Make Change
-      run: date > temp.txt
+      run: node GH-PR/index.js
     
     - name: Commit
       run: |
            git config user.name github-actions
            git config user.email bot@imagemovermd.com
-           git add temp.txt
+           git add temp.json
            git commit -m "chore(temp) Update copyright to $(date +"%Y")"
            git push --set-upstream origin $(cat BRANCH)
     
