@@ -8,4 +8,5 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - run: gh repo view
+    - run: GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}\
+           gh repo view
