@@ -16,20 +16,20 @@ jobs:
     
     - name: Generate Branch Name
       run: |
-           export BRANCH="bot-$(date +"%Y%s")"
-           echo "::set-env name=BRANCH::$BRANCH"
-    
+           BRANCH < echo "bot-$(date +"%Y%s")"
+           cat BRANCH
+           
     - name: Checkout Branch
-      run: git checkout -b $BRANCH
+      run: git checkout -b $(cat BRANCH)
   
     - name: Make Change
       run: temp.txt < $(date)
     
     - name: Commit
       run: |
-           git add package.json
-           git commit -m "chore(package.json) Update copyright to $(date +"%Y")"
-           git push --set-upstream origin $BRANCH
+           git add temp.txt
+           git commit -m "chore(temp) Update copyright to $(date +"%Y")"
+           git push --set-upstream origin $(cat BRANCH)
     
     - name: Create PR
       run: GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} gh pr create
