@@ -1,0 +1,23 @@
+name: (Mock) Release
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version Number (<Major>.<Minor>.<Patch>)'
+        required: true
+      changelog:
+        description: 'Should a changelog should be generated'
+        default: false
+
+jobs:
+  release:
+    runs-on: ubunut-latest
+
+    steps:
+    - name: Git Checkout
+      uses: actions/checkout@v2
+
+    -name: Details
+      run: |
+        echo "Version: ${{ github.event.inputs.version }}"
+        echo "Gen Changelog: ${{ github.event.inputs.changelog }}"
