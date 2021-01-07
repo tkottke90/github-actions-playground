@@ -14,12 +14,14 @@ jobs:
     - name: View Repo
       run: GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} gh repo view
     
-    - name: Create Branch
+    - name: Generate Branch Name
       run: |
-           export BRANCH="bot-$(date +"%Ys")"
-           git checkout -b $BRANCH
-           "::set-env name=BRANCH::$BRANCH"
+           export BRANCH="bot-$(date +"%Y%s")"
+           echo "::set-env name=BRANCH::$BRANCH"
     
+    - name: Checkout Branch
+      run: git checkout -b $BRANCH
+  
     - name: Make Change
       run: temp.txt < $(date)
     
