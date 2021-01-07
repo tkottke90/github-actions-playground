@@ -9,7 +9,7 @@ jobs:
 
     steps:
     - name: Git Checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
       
     - name: View Repo
       run: GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} gh repo view
@@ -27,6 +27,8 @@ jobs:
     
     - name: Commit
       run: |
+           git config user.name github-actions
+           git config user.email bot@imagemovermd.com
            git add temp.txt
            git commit -m "chore(temp) Update copyright to $(date +"%Y")"
            git push --set-upstream origin $(cat BRANCH)
